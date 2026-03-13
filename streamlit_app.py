@@ -1,27 +1,24 @@
 import streamlit as st
 from openai import OpenAI
 
-client = OpenAI(api_key="YOUR_API_KEY")
+# Connect to OpenAI using Streamlit secrets
+client = OpenAI(api_key=st.secrets["sk-...GSUA"])
 
 st.title("🌱 AI Eco Product Scanner")
 
 product = st.text_input("Enter a product name")
 
-if st.button("Analyze"):
-    if product:
-        prompt = f"""
-        Analyze the environmental impact of this product: {product}.
-        Give:
-        1. Material type
-        2. Recyclability
-        3. Environmental impact
-        4. Eco-friendly suggestion
-        """
+if st.button("Scan"):
 
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}]
+    if product == "":
+        st.write("Please enter a product name")
+    else:
+        prompt = f"Tell the environmental impact, recyclability, and eco-friendly suggestion for {product}."
+
+        response = client.responses.create(
+            model="gpt-4.1-mini",
+            input=prompt
         )
 
-        result = response.choices[0].message.content
-        st.write(result)
+        st.subheader("Result")
+        st.write(response.output_text)
