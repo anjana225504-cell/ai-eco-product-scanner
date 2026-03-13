@@ -1,25 +1,16 @@
 import streamlit as st
 
 st.title("🌱 AI Eco Product Scanner")
+st.write("Type a product name and get its environmental impact and suggestions!")
 
-product = st.text_input("Enter a product name")
+# Input box for user
+product = st.text_input("Enter a product name:")
 
+# Button to run analysis
 if st.button("Analyze"):
-    
-    if "plastic" in product.lower():
-        st.success("Material: Plastic")
-        st.write("Recyclable: Yes")
-        st.write("Suggestion: Use reusable bottles")
-
-    elif "paper" in product.lower():
-        st.success("Material: Paper")
-        st.write("Recyclable: Yes")
-        st.write("Suggestion: Recycle properly")
-
-    elif "battery" in product.lower():
-        st.error("Material: Chemical")
-        st.write("Recyclable: Special recycling required")
-        st.write("Suggestion: Dispose at e-waste center")
-
-    else:
-        st.warning("Eco impact unknown. Try plastic, paper, or battery.")
+    if product:
+        # For now, a simple placeholder response
+        st.success(f"Analyzing: {product}")
+        st.write("Material: Plastic (example)")
+        st.write("Recyclable: Yes (example)")
+        st.write("Suggestion: Use reusable alternatives (example)")
